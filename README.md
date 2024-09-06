@@ -27,15 +27,7 @@ Scrape Data: Initiate scraping, and the data is retrieved, including URLs linkin
 
 Cost Analysis: Review the token usage and cost for this more extensive data set.
 
-## 3. Handling User Feedback
-   
-Consistency in Naming: Implement structured output to ensure consistent naming of fields across different scraping operations.
-
-Library Utilization: Discuss the use of libraries like firr and alternatives for simplifying the scraping process while addressing CAPTCHA and other complexities.
-
-Exploration of Alternatives: Consider benefits and drawbacks of using libraries versus manual scraping.
-
-## 4. Code Implementation
+## 3. Code Implementation
    
 Boilerplate Imports: Import necessary libraries like Pandas, BeautifulSoup, fentic, html2text, and Selenium.
 
@@ -49,19 +41,27 @@ Boilerplate Imports: Import necessary libraries like Pandas, BeautifulSoup, fent
 	
 	Conversion to Markdown: Use html2text to convert HTML into a readable Markdown format.
 	
-	### c. Dynamic Schema Creation:
+  ### c. Dynamic Schema Creation:
 	
 	Schema Definition: Dynamically create a pydantic model based on user-provided fields.
 	
 	Container Setup: Define a container to hold multiple rows of the scraped data.
 	
-	### d. Token and Price Calculation:
+  ### d. Token and Price Calculation:
 	Token Counting: Trim tokens if necessary and calculate the cost based on the number of tokens used.
 	
-	### e. Save and Export Data:
+  ### e. Save and Export Data:
 	JSON and Excel Export: Save the scraped data in JSON format and export it as an Excel file.
 	
-## 5. Application Interface (Streamlit):
+## 4. Application Interface (Streamlit):
 Sidebar Setup: Configure sidebar options like model selection and field tags.
 	
 Main Interface: Present the scraped data and offer export options.
+
+## 5. Handling User Feedback
+   
+Consistency in Naming: Implement structured output to ensure consistent naming of fields across different scraping operations.
+
+Library Utilization: Discuss the use of libraries like firr and alternatives for simplifying the scraping process while addressing CAPTCHA and other complexities.
+
+Exploration of Alternatives: Consider benefits and drawbacks of using libraries versus manual scraping.
