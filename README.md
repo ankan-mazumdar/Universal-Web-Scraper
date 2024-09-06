@@ -1,67 +1,99 @@
-# Universal-Web-Scraper
+# Universal-Web-Scraper using Python, Selenium and Streamlit UI
 
 
 ![image](https://github.com/user-attachments/assets/33f2367d-9209-4704-a78a-5bde0db8713e)
 
-## 1. Scraping Setup
 
-URL Input: Enter the URL of the website you wish to scrape.
+This guide will walk you through setting up the environment, installing the required packages, configuring your API key, and running a web scraping application. By the end of this tutorial, you'll be able to scrape data from websites using Python.
 
-Field Definition: Define the fields you want to extract from the website (e.g., title, number of points, creator, date of posting, number of comments).
+## 1. Setting Up the Environment
 
-Initiate Scraping: Click on "Scrape" to begin the scraping process.
+Before we dive into web scraping, let's set up a Python environment to work in.
 
-Data Presentation: The scraper retrieves data and presents it in a table format.
+### Step 1: Create a Virtual Environment
 
-Export Options: You can export the data in various formats such as JSON, Excel, or Markdown.
+To keep your project dependencies organized, it's best to create a virtual environment:
 
-Cost Estimation: The application shows the number of input and output tokens and calculates the cost of the scraping operation.
+```bash
+python3 -m venv scraping-env
+```
 
-## 2. Advanced Scraping Example
-   
-Alternative Website: Test the scraper on another website, such as a car listing site.
+### Step 2: Activate the Virtual Environment
 
-Field Definition: Define new fields for scraping (e.g., image, vehicle name, vehicle info, condition, sale info, bids).
+Next, activate the environment:
 
-Scrape Data: Initiate scraping, and the data is retrieved, including URLs linking to specific car listings.
+- **Windows:**
 
-Cost Analysis: Review the token usage and cost for this more extensive data set.
+  ```bash
+  .\scraping-env\Scripts\activate
+  ```
 
-## 3. Code Implementation
-   
-Boilerplate Imports: Import necessary libraries like Pandas, BeautifulSoup, fentic, html2text, and Selenium.
+- **macOS/Linux:**
 
- ### a. Selenium Setup:
-  Create Options: Add arguments like disabling GPU, setting the user agent, and ensuring Chrome instances are separate.
+  ```bash
+  source scraping-env/bin/activate
+  ```
 
-  Fetch HTML: Use Selenium to mimic human behavior (e.g., scrolling) and fetch the HTML of the target page.
+## 2. Installing Required Packages
 
-  ### b. Markdown Creation:
-	HTML Cleaning: Remove unnecessary sections like footers and headers.
-	
-	Conversion to Markdown: Use html2text to convert HTML into a readable Markdown format.
-	
-  ### c. Dynamic Schema Creation:
-	
-	Schema Definition: Dynamically create a pydantic model based on user-provided fields.
-	
-	Container Setup: Define a container to hold multiple rows of the scraped data.
-	
-  ### d. Token and Price Calculation:
-	Token Counting: Trim tokens if necessary and calculate the cost based on the number of tokens used.
-	
-  ### e. Save and Export Data:
-	JSON and Excel Export: Save the scraped data in JSON format and export it as an Excel file.
-	
-## 4. Application Interface (Streamlit):
-Sidebar Setup: Configure sidebar options like model selection and field tags.
-	
-Main Interface: Present the scraped data and offer export options.
+With the virtual environment activated, let's install the necessary packages.
 
-## 5. Handling User Feedback
-   
-Consistency in Naming: Implement structured output to ensure consistent naming of fields across different scraping operations.
+### Step 3: Install the Requirements
 
-Library Utilization: Discuss the use of libraries like firr and alternatives for simplifying the scraping process while addressing CAPTCHA and other complexities.
+Run the following command to install all required libraries:
 
-Exploration of Alternatives: Consider benefits and drawbacks of using libraries versus manual scraping.
+```bash
+pip install -r requirements.txt
+```
+
+This will install everything you need for the web scraping application.
+
+## 3. Setting Up Your API Key
+
+If you're using an API that requires authentication, you'll need to set up your API key.
+
+### Step 4: Create an `.env` File
+
+Create a `.env` file in the root directory of your project and add your API key like this:
+
+```plaintext
+API_KEY=your_api_key_here
+```
+
+### Step 5: Load the API Key in Your Code
+
+In your Python script, ensure the API key is loaded using the `dotenv` library:
+
+```python
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+api_key = os.getenv('API_KEY')
+```
+
+## 4. Running the Web Scraping Application
+
+Now that your environment is set up and your API key is configured, you can run the web scraping application.
+
+### Step 6: Run the Application
+
+Execute your Python script to start scraping:
+
+```bash
+python scrape.py
+```
+
+This will initiate the web scraping process, and you'll see the output based on the websites you've configured to scrape.
+
+## 5. Trying Out Scraping Websites
+
+### Step 7: Experiment with Different Websites
+
+You can customize the scraping targets by modifying the URLs and scraping logic in your `scrape.py` file. Try scraping different websites by changing the `url` variable and the parsing logic to suit your needs.
+
+### Step 8: Analyze and Store the Data
+
+Once the data is scraped, you can analyze it or store it in a format of your choice (e.g., CSV, JSON, or a database). Modify the script to save the scraped data as needed.
+
