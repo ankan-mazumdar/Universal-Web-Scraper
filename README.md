@@ -1,6 +1,10 @@
 # Universal-Web-Scraper using Python, Selenium and Streamlit UI
 
 
+![image](https://github.com/user-attachments/assets/958b06ce-1c22-447b-8f59-0dddab4d8f7f)
+
+
+
 ![image](https://github.com/user-attachments/assets/33f2367d-9209-4704-a78a-5bde0db8713e)
 
 
