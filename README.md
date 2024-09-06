@@ -61,7 +61,9 @@ If you're using an API that requires authentication, you'll need to set up your 
 Create a `.env` file in the root directory of your project and add your API key like this:
 
 ```plaintext
-API_KEY=your_api_key_here
+OPENAI_API_KEY=sk-xxxxxxxx(place your own key)
+GOOGLE_API_KEY=AIzaSyxxxxxxx
+GROQ_API_KEY=gskxxxxxxxxx   
 ```
 
 ### Step 5: Load the API Key in Your Code
