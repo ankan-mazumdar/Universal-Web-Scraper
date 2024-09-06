@@ -12,3 +12,5 @@ streamlit
 streamlit-tags
 openpyxl 
 webdriver-manager
+groq
+google-generativeai    

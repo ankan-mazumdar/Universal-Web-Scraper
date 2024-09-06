@@ -5,6 +5,8 @@ import json
 from datetime import datetime
 from scraper import fetch_html_selenium, save_raw_data, format_data, save_formatted_data, calculate_price,html_to_markdown_with_readability, create_dynamic_listing_model,create_listings_container_model
 
+from assets import PRICING
+
 
 # Initialize Streamlit app
 st.set_page_config(page_title="Universal Web Scraper")
@@ -12,7 +14,7 @@ st.title("Universal Web Scraper 🦑")
 
 # Sidebar components
 st.sidebar.title("Web Scraper Settings")
-model_selection = st.sidebar.selectbox("Select Model", options=["gpt-4o", "gpt-4o-2024-08-06"], index=0)
+model_selection = st.sidebar.selectbox("Select Model", options=list(PRICING.keys()), index=0)
 url_input = st.sidebar.text_input("Enter URL")
 
 
@@ -45,9 +47,8 @@ def perform_scrape():
     save_raw_data(markdown, timestamp)
     DynamicListingModel = create_dynamic_listing_model(fields)
     DynamicListingsContainer = create_listings_container_model(DynamicListingModel)
-    formatted_data = format_data(markdown, DynamicListingsContainer)
-    formatted_data_text = json.dumps(formatted_data.dict())
-    input_tokens, output_tokens, total_cost = calculate_price(markdown, formatted_data_text, model=model_selection)
+    formatted_data, tokens_count = format_data(markdown, DynamicListingsContainer,DynamicListingModel,model_selection)
+    input_tokens, output_tokens, total_cost = calculate_price(tokens_count, model=model_selection)
     df = save_formatted_data(formatted_data, timestamp)
 
     return df, formatted_data, markdown, input_tokens, output_tokens, total_cost, timestamp
@@ -73,10 +74,15 @@ if st.session_state.get('perform_scrape'):
     # Create columns for download buttons
     col1, col2, col3 = st.columns(3)
     with col1:
-        st.download_button("Download JSON", data=json.dumps(formatted_data.dict(), indent=4), file_name=f"{timestamp}_data.json")
+        st.download_button("Download JSON", data=json.dumps(formatted_data.dict() if hasattr(formatted_data, 'dict') else formatted_data, indent=4), file_name=f"{timestamp}_data.json")
     with col2:
         # Convert formatted data to a dictionary if it's not already (assuming it has a .dict() method)
-        data_dict = formatted_data.dict() if hasattr(formatted_data, 'dict') else formatted_data
+        if isinstance(formatted_data, str):
+            # Parse the JSON string into a dictionary
+            data_dict = json.loads(formatted_data)
+        else:
+            data_dict = formatted_data.dict() if hasattr(formatted_data, 'dict') else formatted_data
+
         
         # Access the data under the dynamic key
         first_key = next(iter(data_dict))  # Safely get the first key
@@ -93,4 +99,3 @@ if st.session_state.get('perform_scrape'):
 # Ensure that these UI components are persistent and don't rely on re-running the scrape function
 if 'results' in st.session_state:
     df, formatted_data, markdown, input_tokens, output_tokens, total_cost, timestamp = st.session_state['results']
-        
