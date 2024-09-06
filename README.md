@@ -82,7 +82,7 @@ Now that your environment is set up and your API key is configured, you can run 
 Execute your Python script to start scraping:
 
 ```bash
-python scrape.py
+Streamlit run streamlit_app.py
 ```
 
 This will initiate the web scraping process, and you'll see the output based on the websites you've configured to scrape.
